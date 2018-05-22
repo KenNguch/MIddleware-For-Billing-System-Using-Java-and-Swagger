@@ -1,5 +1,5 @@
 The project in this case was created using the java and swagger loca APIs.
-
+0.Import the sql given(it uses xampp): https://www.apachefriends.org/download.html
 1.[optional] Import the maven project in the eclipse IDE uses java 8 and above.(must have installed maven and java)
 
 
