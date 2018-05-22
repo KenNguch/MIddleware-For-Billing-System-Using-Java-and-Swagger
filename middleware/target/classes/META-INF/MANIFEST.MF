@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Built-By: n3twork
+Build-Jdk: 10.0.1
+Implementation-Title: ken-KWP-seed
+Implementation-Version: 0.1.0
+Implementation-Vendor-Id: org.KWP
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/ken-KWP-seed
+ /
+Created-By: Maven Integration for Eclipse
+
