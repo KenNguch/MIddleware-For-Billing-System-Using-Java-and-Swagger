@@ -6,73 +6,74 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class GlobalClass {
 
-	@Autowired
-	DataSource dataSource;
+    @Autowired
+    DataSource dataSource;
 
-	public String getCustomerEmail(BigDecimal customer_id) throws SQLException {
-		PreparedStatement cst = null;
+    public String getCustomerEmail(BigDecimal customer_id) throws SQLException {
+        PreparedStatement cst = null;
 
-		Connection conn = null;
+        Connection conn = null;
 
-		String selectSQL = "SELECT customer_email_address from customers where 	customer_id= " + customer_id;
-		String email = null;
+        String selectSQL = "SELECT customer_email_address from customers where 	customer_id= " + customer_id;
+        String email = null;
 
-		try {
+        try {
 
-			conn = dataSource.getConnection();
+            conn = dataSource.getConnection();
 
-			cst = conn.prepareStatement(selectSQL);
+            cst = conn.prepareStatement(selectSQL);
 
-			ResultSet rs = cst.executeQuery();
-			while (rs.next()) {
+            ResultSet rs = cst.executeQuery();
+            while (rs.next()) {
 
-				email = rs.getString("customer_email_address");
+                email = rs.getString("customer_email_address");
 
-			}
+            }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
 
-		return email;
-	}
-	
-	
-	public String getCustomerSms(BigDecimal customer_id) throws SQLException {
-		PreparedStatement cst = null;
+        return email;
+    }
 
-		Connection conn = null;
 
-		String selectSQL = "SELECT 	customer_phone_number from customers where customer_id= " + customer_id;
-		String phone_number = null;
+    public String getCustomerSms(BigDecimal customer_id) throws SQLException {
+        PreparedStatement cst = null;
 
-		try {
+        Connection conn = null;
 
-			conn = dataSource.getConnection();
+        String selectSQL = "SELECT 	customer_phone_number from customers where customer_id= " + customer_id;
+        String phone_number = null;
 
-			cst = conn.prepareStatement(selectSQL);
+        try {
 
-			ResultSet rs = cst.executeQuery();
-			while (rs.next()) {
+            conn = dataSource.getConnection();
 
-				phone_number = rs.getString("customer_sms");
+            cst = conn.prepareStatement(selectSQL);
 
-			}
+            ResultSet rs = cst.executeQuery();
+            while (rs.next()) {
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
+                phone_number = rs.getString("customer_sms");
 
-		return phone_number;
-	}
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+
+        return phone_number;
+    }
 
 }

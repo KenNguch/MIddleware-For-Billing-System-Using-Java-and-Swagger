@@ -15,31 +15,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/kwp-modules/Service")
 public class ServicesController {
 
-	@Autowired
-	ServicesDAO servicesDAO;
+    @Autowired
+    ServicesDAO servicesDAO;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/fetchAllServices")
-	public List<ServicesBean> fetchAllServices() throws SQLException {
+    @RequestMapping(method = RequestMethod.GET, value = "/fetchAllServices")
+    public List<ServicesBean> fetchAllServices() throws SQLException {
 
-		return servicesDAO.fetchAllServices();
-	}
+        return servicesDAO.fetchAllServices();
+    }
 
-	@RequestMapping(method = RequestMethod.POST, value = "/createService")
-	public List<ServicesBean> createService(@RequestBody ServicesBean servicesBean) throws SQLException {
+    @RequestMapping(method = RequestMethod.POST, value = "/createService")
+    public List<ServicesBean> createService(@RequestBody ServicesBean servicesBean) throws SQLException {
 
-		return servicesDAO.createService(servicesBean.getService_name());
-	}
+        return servicesDAO.createService(servicesBean.getService_name());
+    }
 
-	@RequestMapping(method = RequestMethod.POST, value = "/updateService")
-	public List<ServicesBean> updateService(@RequestBody ServicesBean servicesBean) throws SQLException {
+    @RequestMapping(method = RequestMethod.POST, value = "/updateService")
+    public List<ServicesBean> updateService(@RequestBody ServicesBean servicesBean) throws SQLException {
 
-		return servicesDAO.updateService(servicesBean.getService_id(), servicesBean.getService_name());
-	}
+        return servicesDAO.updateService(servicesBean.getService_id(), servicesBean.getService_name());
+    }
 
-	@RequestMapping(method = RequestMethod.POST, value = "/deleteService")
-	public List<ServicesBean> deleteService(@RequestParam BigDecimal Service_id) throws SQLException {
+    @RequestMapping(method = RequestMethod.POST, value = "/deleteService")
+    public List<ServicesBean> deleteService(@RequestParam BigDecimal Service_id) throws SQLException {
 
-		return servicesDAO.deleteServices(Service_id);
-	}
+        return servicesDAO.deleteServices(Service_id);
+    }
 
 }

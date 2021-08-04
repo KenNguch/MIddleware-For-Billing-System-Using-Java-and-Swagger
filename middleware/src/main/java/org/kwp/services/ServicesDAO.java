@@ -1,7 +1,6 @@
 package org.kwp.services;
 
 
-
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Repository;
@@ -18,127 +18,126 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ServicesDAO {
 
-	@Autowired
-	DataSource dataSource;
+    @Autowired
+    DataSource dataSource;
 
-	public List<ServicesBean> fetchAllServices() throws SQLException {
-		PreparedStatement cst = null;
+    public List<ServicesBean> fetchAllServices() throws SQLException {
+        PreparedStatement cst = null;
 
-		Connection conn = null;
+        Connection conn = null;
 
-		String selectSQL = "SELECT service_id, service_name from services";
-		List<ServicesBean> servicesList = new ArrayList<ServicesBean>();
+        String selectSQL = "SELECT service_id, service_name from services";
+        List<ServicesBean> servicesList = new ArrayList<ServicesBean>();
 
-		try {
+        try {
 
-			conn = dataSource.getConnection();
+            conn = dataSource.getConnection();
 
-			cst = conn.prepareStatement(selectSQL);
+            cst = conn.prepareStatement(selectSQL);
 
-			ResultSet rs = cst.executeQuery();
-			while (rs.next()) {
+            ResultSet rs = cst.executeQuery();
+            while (rs.next()) {
 
-				ServicesBean services = new ServicesBean();
-				services.setService_id(rs.getBigDecimal("service_id"));
-				services.setService_name(rs.getString("service_name"));
+                ServicesBean services = new ServicesBean();
+                services.setService_id(rs.getBigDecimal("service_id"));
+                services.setService_name(rs.getString("service_name"));
 
-				servicesList.add(services);
+                servicesList.add(services);
 
-			}
+            }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
 
-		return servicesList;
-	}
+        return servicesList;
+    }
 
-	public List<ServicesBean> createService(String service_name) throws SQLException {
-		PreparedStatement cst = null;
+    public List<ServicesBean> createService(String service_name) throws SQLException {
+        PreparedStatement cst = null;
 
-		Connection conn = null;
+        Connection conn = null;
 
-		String selectSQL = "INSERT INTO services(service_id,service_name) values  (" + genRandomInt() + ", '"
-				+ service_name + "')";
+        String selectSQL = "INSERT INTO services(service_id,service_name) values  (" + genRandomInt() + ", '"
+                + service_name + "')";
 
-	
-		
-		List<ServicesBean> servicesList = new ArrayList<ServicesBean>();
 
-		try {
+        List<ServicesBean> servicesList = new ArrayList<ServicesBean>();
 
-			conn = dataSource.getConnection();
+        try {
 
-			cst = conn.prepareStatement(selectSQL);
+            conn = dataSource.getConnection();
 
-			cst.execute();
+            cst = conn.prepareStatement(selectSQL);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
-		servicesList = fetchAllServices();
-		return servicesList;
-	}
+            cst.execute();
 
-	public List<ServicesBean> updateService(BigDecimal service_id, String service_name) throws SQLException {
-		PreparedStatement cst = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        servicesList = fetchAllServices();
+        return servicesList;
+    }
 
-		Connection conn = null;
+    public List<ServicesBean> updateService(BigDecimal service_id, String service_name) throws SQLException {
+        PreparedStatement cst = null;
 
-		String selectSQL = "UPDATE services set service_name = '" + service_name + "'  where service_id=" + service_id + "";
-		List<ServicesBean> servicesList = new ArrayList<ServicesBean>();
+        Connection conn = null;
 
-		try {
+        String selectSQL = "UPDATE services set service_name = '" + service_name + "'  where service_id=" + service_id + "";
+        List<ServicesBean> servicesList = new ArrayList<ServicesBean>();
 
-			conn = dataSource.getConnection();
+        try {
 
-			cst = conn.prepareStatement(selectSQL);
+            conn = dataSource.getConnection();
 
-			cst.execute();
+            cst = conn.prepareStatement(selectSQL);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
-		servicesList = fetchAllServices();
-		return servicesList;
-	}
+            cst.execute();
 
-	public List<ServicesBean> deleteServices(BigDecimal service_id) throws SQLException {
-		PreparedStatement cst = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        servicesList = fetchAllServices();
+        return servicesList;
+    }
 
-		Connection conn = null;
+    public List<ServicesBean> deleteServices(BigDecimal service_id) throws SQLException {
+        PreparedStatement cst = null;
 
-		String selectSQL = "DELETE from services where service_id = " + service_id;
-		List<ServicesBean> servicesList = new ArrayList<ServicesBean>();
+        Connection conn = null;
 
-		try {
+        String selectSQL = "DELETE from services where service_id = " + service_id;
+        List<ServicesBean> servicesList = new ArrayList<ServicesBean>();
 
-			conn = dataSource.getConnection();
+        try {
 
-			cst = conn.prepareStatement(selectSQL);
+            conn = dataSource.getConnection();
 
-			cst.execute();
+            cst = conn.prepareStatement(selectSQL);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
-		servicesList = fetchAllServices();
-		return servicesList;
-	}
+            cst.execute();
 
-	public int genRandomInt() {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        servicesList = fetchAllServices();
+        return servicesList;
+    }
 
-		Random rnd = new Random();
-		return rnd.nextInt(30);
+    public int genRandomInt() {
 
-	}
+        Random rnd = new Random();
+        return rnd.nextInt(30);
+
+    }
 
 }

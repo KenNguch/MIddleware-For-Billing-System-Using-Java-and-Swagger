@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/kwp-modules/sms")
 public class SmsRestController {
 
-	@Autowired
-	SmsEngine smsEngine;	
-	
-	
-@RequestMapping(method ={ RequestMethod.POST }, value = "/sendSms")
-	public String sendSms(@RequestParam String message, @RequestParam String recipients) {
+    @Autowired
+    SmsEngine smsEngine;
 
-		String success = smsEngine.sendSms(recipients, message);
 
-		if (success == null)
-			return "SMS NOT Sent";
-		else if (success.equalsIgnoreCase("success"))
-			return "SMS(S) Sent Succesfully to:  " + recipients;
-		else
-			return success;
+    @RequestMapping(method = {RequestMethod.POST}, value = "/sendSms")
+    public String sendSms(@RequestParam String message, @RequestParam String recipients) {
 
-	}
-	
-	
+        String success = smsEngine.sendSms(recipients, message);
+
+        if (success == null)
+            return "SMS NOT Sent";
+        else if (success.equalsIgnoreCase("success"))
+            return "SMS(S) Sent Succesfully to:  " + recipients;
+        else
+            return success;
+
+    }
+
+
 }

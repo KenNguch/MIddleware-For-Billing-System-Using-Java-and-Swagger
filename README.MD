@@ -1,17 +1,34 @@
-The project in this case was created using the java and swagger loca APIs.
-0.Import the sql given(it uses xampp): https://www.apachefriends.org/download.html
-1.[optional] Import the maven project in the eclipse IDE uses java 8 and above.(must have installed maven and java)
+## ReadMe.MD
+The project in this case was created using the java(SpringBoot) and DB (MySql).
+- Import the sql script(preffereably use [Xampp](https://www.apachefriends.org/download.html))
+
+- [optional] Import the maven project in your favourite IDE.
+   > Note: `Java 8 , MySql and [Maven](https://maven.apache.org/) ` are required. Download **[Java 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)** and  **[Maven](https://maven.apache.org/)** 
+
+- If using windows install - **[Git](https://git-scm.com/).**
+- Create usernames in Africas Talking or any SMS API handler -**[Africastalking](https://africastalking.com)**
+- Create usernames in Sendgrid  or any Email API handler - **[Sendgrid](https://sendgrid.com/)**
+- Replace the above usernames and API keys extracted in the above steps[3 & 4] in the Apllication.properties file located in   **`./middleware/src/main/resources"`**
+- Proceed to the location **`./middleware/`**
+- Run the following commmand usig your CMD/Terminal:  
+
+```
+mvn spring-boot:run
+```
 
 
-2.if using windows install git.
-3.Create usernames in Africas Talking or any sms API handler.(https://africastalking.com)
-4.Create usernames in Sendgrid  or any Email API handler(https://sendgrid.com/)
-5.Replace the above usernames and API keys extracted in the above steps[3 & 4] in the Apllication.properties file located in   "....../middleware/src/main/resources"
-6.proceed to the location ".....  middleware/" and git bash(if using linux cd to that location)
-7.Type this command in the Teminal:   "mvn springboot:run"
-8. Proceed to opening the browser and paste this link "http://localhost:8089/swagger-ui.html"
 
-NOTE: If the naming of the apis are wrong all the smses and emails wont send.
+- After a successful build and run head to http://localhost:8089/swagger-ui.html
 
+>NOTE: If the naming of the apis are wrong all the smses and emails wont send.
+
+Linux Installation of requirements and running the program(manual installation of your sqll client is required)
+
+```
+sudo apt-get update 
+sudo apt-get upgrade -y
+sudo apt-get install openjdk-8-jre maven -y
+mvn spring-boot:run
+```
 
 FrontEnd Coming Soon

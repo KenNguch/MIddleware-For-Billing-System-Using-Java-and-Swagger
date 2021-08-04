@@ -15,33 +15,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/kwp-modules/Customers")
 public class CustomersController {
 
-	@Autowired
-	CustomersDAO customersDAO;
+    @Autowired
+    CustomersDAO customersDAO;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/fetchAllCustomers")
-	public List<CustomersBean> fetchAllCustomers() throws SQLException {
+    @RequestMapping(method = RequestMethod.GET, value = "/fetchAllCustomers")
+    public List<CustomersBean> fetchAllCustomers() throws SQLException {
 
-		return customersDAO.fetchAllCustomers();
-	}
+        return customersDAO.fetchAllCustomers();
+    }
 
-	@RequestMapping(method = RequestMethod.POST, value = "/createCustomer")
-	public List<CustomersBean> createCustomer(@RequestBody CustomersBean customersBean) throws SQLException {
+    @RequestMapping(method = RequestMethod.POST, value = "/createCustomer")
+    public List<CustomersBean> createCustomer(@RequestBody CustomersBean customersBean) throws SQLException {
 
-		return customersDAO.createCustomer( customersBean.getCustomer_name(),customersBean.getCustomer_phone_number(),customersBean.getCustomer_connection_number(),customersBean.getCustomer_email_address());
-	}
+        return customersDAO.createCustomer(customersBean.getCustomer_name(), customersBean.getCustomer_phone_number(), customersBean.getCustomer_connection_number(), customersBean.getCustomer_email_address());
+    }
 
-	@RequestMapping(method = RequestMethod.POST, value = "/updateCustomer")
-	public List<CustomersBean> updateCustomer(@RequestBody CustomersBean customersBean) throws SQLException {
+    @RequestMapping(method = RequestMethod.POST, value = "/updateCustomer")
+    public List<CustomersBean> updateCustomer(@RequestBody CustomersBean customersBean) throws SQLException {
 
-		return customersDAO.updateCustomer(customersBean.getCustomer_id(), customersBean.getCustomer_name(),customersBean.getCustomer_phone_number(),customersBean.getCustomer_connection_number(),customersBean.getCustomer_email_address());
-	}
+        return customersDAO.updateCustomer(customersBean.getCustomer_id(), customersBean.getCustomer_name(), customersBean.getCustomer_phone_number(), customersBean.getCustomer_connection_number(), customersBean.getCustomer_email_address());
+    }
 
-	@RequestMapping(method = RequestMethod.POST, value = "/deleteCustomer")
-	public List<CustomersBean> deleteCustomer(@RequestParam BigDecimal customer_id) throws SQLException {
+    @RequestMapping(method = RequestMethod.POST, value = "/deleteCustomer")
+    public List<CustomersBean> deleteCustomer(@RequestParam BigDecimal customer_id) throws SQLException {
 
-		return customersDAO.deleteCustomer(customer_id);
-	}
-	
-	
+        return customersDAO.deleteCustomer(customer_id);
+    }
+
 
 }

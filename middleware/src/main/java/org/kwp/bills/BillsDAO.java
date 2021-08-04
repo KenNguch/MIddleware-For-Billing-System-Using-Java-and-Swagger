@@ -19,124 +19,124 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BillsDAO {
 
-	@Autowired
-	DataSource dataSource;
+    @Autowired
+    DataSource dataSource;
 
-	public List<BillsBean> fetchAllBills() throws SQLException {
-		PreparedStatement cst = null;
+    public List<BillsBean> fetchAllBills() throws SQLException {
+        PreparedStatement cst = null;
 
-		Connection conn = null;
+        Connection conn = null;
 
-		String selectSQL = "SELECT bill_id, bill_name  from bills";
-		List<BillsBean> billsList = new ArrayList<BillsBean>();
+        String selectSQL = "SELECT bill_id, bill_name  from bills";
+        List<BillsBean> billsList = new ArrayList<BillsBean>();
 
-		try {
+        try {
 
-			conn = dataSource.getConnection();
-			cst = conn.prepareStatement(selectSQL);
+            conn = dataSource.getConnection();
+            cst = conn.prepareStatement(selectSQL);
 
-			ResultSet rs = cst.executeQuery();
-			while (rs.next()) {
+            ResultSet rs = cst.executeQuery();
+            while (rs.next()) {
 
-				BillsBean bills = new BillsBean();
-				bills.setBill_id(rs.getBigDecimal("bill_id"));
-				bills.setBill_name(rs.getString("bill_name"));
-				
-				
-				billsList.add(bills);
+                BillsBean bills = new BillsBean();
+                bills.setBill_id(rs.getBigDecimal("bill_id"));
+                bills.setBill_name(rs.getString("bill_name"));
 
-			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
+                billsList.add(bills);
 
-		return billsList;
-	}
+            }
 
-	public List<BillsBean> createBill(String bill_name) throws SQLException {
-		PreparedStatement cst = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
 
-		Connection conn = null;
+        return billsList;
+    }
 
-		String selectSQL = "INSERT INTO bills(bill_id,bill_name) values  (" + genRandomInt() + ",'"+ bill_name + "')";
+    public List<BillsBean> createBill(String bill_name) throws SQLException {
+        PreparedStatement cst = null;
 
-		List<BillsBean> billsList = new ArrayList<BillsBean>();
+        Connection conn = null;
 
-		try {
+        String selectSQL = "INSERT INTO bills(bill_id,bill_name) values  (" + genRandomInt() + ",'" + bill_name + "')";
 
-			conn = dataSource.getConnection();
+        List<BillsBean> billsList = new ArrayList<BillsBean>();
 
-			cst = conn.prepareStatement(selectSQL);
+        try {
 
-			cst.execute();
+            conn = dataSource.getConnection();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
-		billsList = fetchAllBills();
-		return billsList;
-	}
+            cst = conn.prepareStatement(selectSQL);
 
-	public List<BillsBean> updateBill(BigDecimal bill_id, String bill_name) throws SQLException {
-		PreparedStatement cst = null;
+            cst.execute();
 
-		Connection conn = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        billsList = fetchAllBills();
+        return billsList;
+    }
 
-		String selectSQL = "UPDATE bills set bill_name = '" + bill_name +"'  where bill_id=" + bill_id + "";
-		List<BillsBean> billsList = new ArrayList<BillsBean>();
+    public List<BillsBean> updateBill(BigDecimal bill_id, String bill_name) throws SQLException {
+        PreparedStatement cst = null;
 
-		try {
+        Connection conn = null;
 
-			conn = dataSource.getConnection();
+        String selectSQL = "UPDATE bills set bill_name = '" + bill_name + "'  where bill_id=" + bill_id + "";
+        List<BillsBean> billsList = new ArrayList<BillsBean>();
 
-			cst = conn.prepareStatement(selectSQL);
+        try {
 
-			cst.execute();
+            conn = dataSource.getConnection();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
-		billsList = fetchAllBills();
-		return billsList;
-	}
+            cst = conn.prepareStatement(selectSQL);
 
-	public List<BillsBean> deleteBill(BigDecimal bill_id) throws SQLException {
-		PreparedStatement cst = null;
+            cst.execute();
 
-		Connection conn = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        billsList = fetchAllBills();
+        return billsList;
+    }
 
-		String selectSQL = "DELETE from bills  where bill_id = " + bill_id;
-		List<BillsBean> billsList = new ArrayList<BillsBean>();
+    public List<BillsBean> deleteBill(BigDecimal bill_id) throws SQLException {
+        PreparedStatement cst = null;
 
-		try {
+        Connection conn = null;
 
-			conn = dataSource.getConnection();
+        String selectSQL = "DELETE from bills  where bill_id = " + bill_id;
+        List<BillsBean> billsList = new ArrayList<BillsBean>();
 
-			cst = conn.prepareStatement(selectSQL);
+        try {
 
-			cst.execute();
+            conn = dataSource.getConnection();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
-		billsList = fetchAllBills();
-		return billsList;
-	}
+            cst = conn.prepareStatement(selectSQL);
 
-	public int genRandomInt() {
+            cst.execute();
 
-		Random rnd = new Random();
-		return rnd.nextInt(30);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        billsList = fetchAllBills();
+        return billsList;
+    }
 
-	}
+    public int genRandomInt() {
+
+        Random rnd = new Random();
+        return rnd.nextInt(30);
+
+    }
 
 }

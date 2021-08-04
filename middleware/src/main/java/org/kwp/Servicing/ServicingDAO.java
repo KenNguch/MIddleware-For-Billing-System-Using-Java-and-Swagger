@@ -20,179 +20,180 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ServicingDAO {
 
-	@Autowired
-	DataSource dataSource;
+    @Autowired
+    DataSource dataSource;
 
-	public List<ServicingBean> fetchAllServicings() throws SQLException {
-		PreparedStatement cst = null;
+    public List<ServicingBean> fetchAllServicings() throws SQLException {
+        PreparedStatement cst = null;
 
-		Connection conn = null;
+        Connection conn = null;
 
-		String selectSQL = "SELECT 	servicing_id,servicing_service_id,servicing_employee_id,servicing_date,servicing_status from servicing";
-		List<ServicingBean> servicingList = new ArrayList<ServicingBean>();
+        String selectSQL = "SELECT 	servicing_id,servicing_service_id,servicing_employee_id,servicing_date,servicing_status from servicing";
+        List<ServicingBean> servicingList = new ArrayList<ServicingBean>();
 
-		try {
+        try {
 
-			conn = dataSource.getConnection();
-			cst = conn.prepareStatement(selectSQL);
+            conn = dataSource.getConnection();
+            cst = conn.prepareStatement(selectSQL);
 
-			ResultSet rs = cst.executeQuery();
-			while (rs.next()) {
+            ResultSet rs = cst.executeQuery();
+            while (rs.next()) {
 
-				ServicingBean servicing = new ServicingBean();
-				servicing.setServicing_id(rs.getBigDecimal("servicing_id"));
-				servicing.setServicing_service_id(rs.getBigDecimal("servicing_service_id"));
-				servicing.setServicing_employee_id(rs.getBigDecimal("servicing_employee_id"));
-				servicing.setServicing_date(rs.getDate("servicing_date"));
-				servicing.setServicing_status(rs.getString("servicing_status"));
+                ServicingBean servicing = new ServicingBean();
+                servicing.setServicing_id(rs.getBigDecimal("servicing_id"));
+                servicing.setServicing_service_id(rs.getBigDecimal("servicing_service_id"));
+                servicing.setServicing_employee_id(rs.getBigDecimal("servicing_employee_id"));
+                servicing.setServicing_date(rs.getDate("servicing_date"));
+                servicing.setServicing_status(rs.getString("servicing_status"));
 
-				servicingList.add(servicing);
+                servicingList.add(servicing);
 
-			}
+            }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
 
-		return servicingList;
-	}
+        return servicingList;
+    }
 
-	
-	public List<ServicingBean> createServicing(BigDecimal servicing_id, BigDecimal servicing_service_id,
-			BigDecimal servicing_employee_id, Date servicing_date, String servicing_status) throws SQLException {
-		PreparedStatement cst = null;
 
-		Connection conn = null;
+    public List<ServicingBean> createServicing(BigDecimal servicing_id, BigDecimal servicing_service_id,
+                                               BigDecimal servicing_employee_id, Date servicing_date, String servicing_status) throws SQLException {
+        PreparedStatement cst = null;
 
-		String selectSQL = "INSERT INTO servicing(servicing_id,servicing_service_id,servicing_employee_id,servicing_date,servicing_status) values  ("
-				+ genRandomInt() + "," + servicing_service_id + "," + servicing_employee_id + ",'" + currentdate()
-				+ "','" + servicing_status + "')";
+        Connection conn = null;
 
-		List<ServicingBean> servicingList = new ArrayList<ServicingBean>();
+        String selectSQL = "INSERT INTO servicing(servicing_id,servicing_service_id,servicing_employee_id,servicing_date,servicing_status) values  ("
+                + genRandomInt() + "," + servicing_service_id + "," + servicing_employee_id + ",'" + currentdate()
+                + "','" + servicing_status + "')";
 
-		try {
+        List<ServicingBean> servicingList = new ArrayList<ServicingBean>();
 
-			conn = dataSource.getConnection();
+        try {
 
-			cst = conn.prepareStatement(selectSQL);
+            conn = dataSource.getConnection();
 
-			cst.execute();
+            cst = conn.prepareStatement(selectSQL);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
-		servicingList = fetchAllServicings();
+            cst.execute();
 
-		return servicingList;
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        servicingList = fetchAllServicings();
 
-	public List<ServicingBean> updateServicing(BigDecimal servicing_id, BigDecimal servicing_service_id,
-			BigDecimal servicing_employee_id, Date servicing_date, String servicing_status) throws SQLException {
-		PreparedStatement cst = null;
+        return servicingList;
+    }
 
-		Connection conn = null;
+    public List<ServicingBean> updateServicing(BigDecimal servicing_id, BigDecimal servicing_service_id,
+                                               BigDecimal servicing_employee_id, Date servicing_date, String servicing_status) throws SQLException {
+        PreparedStatement cst = null;
 
-		String selectSQL = "UPDATE servicing set servicing_service_id = " + servicing_service_id
-				+ ",servicing_employee_id = " + servicing_employee_id + ",servicing_date = '" + currentdate()
-				+ "',servicing_status ='" + servicing_status + "' where servicing_id=" + servicing_id + "";
-		List<ServicingBean> servicingList = new ArrayList<ServicingBean>();
+        Connection conn = null;
 
-		try {
+        String selectSQL = "UPDATE servicing set servicing_service_id = " + servicing_service_id
+                + ",servicing_employee_id = " + servicing_employee_id + ",servicing_date = '" + currentdate()
+                + "',servicing_status ='" + servicing_status + "' where servicing_id=" + servicing_id + "";
+        List<ServicingBean> servicingList = new ArrayList<ServicingBean>();
 
-			conn = dataSource.getConnection();
+        try {
 
-			cst = conn.prepareStatement(selectSQL);
+            conn = dataSource.getConnection();
 
-			cst.execute();
+            cst = conn.prepareStatement(selectSQL);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
-		servicingList = fetchAllServicings();
+            cst.execute();
 
-		return servicingList;
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        servicingList = fetchAllServicings();
 
-	public List<ServicingBean> deleteServicing(BigDecimal servicing_id) throws SQLException {
-		PreparedStatement cst = null;
+        return servicingList;
+    }
 
-		Connection conn = null;
+    public List<ServicingBean> deleteServicing(BigDecimal servicing_id) throws SQLException {
+        PreparedStatement cst = null;
 
-		String selectSQL = "DELETE from servicing  where servicing_id =" + servicing_id + "";
-		List<ServicingBean> servicingList = new ArrayList<ServicingBean>();
+        Connection conn = null;
 
-		try {
+        String selectSQL = "DELETE from servicing  where servicing_id =" + servicing_id + "";
+        List<ServicingBean> servicingList = new ArrayList<ServicingBean>();
 
-			conn = dataSource.getConnection();
+        try {
 
-			cst = conn.prepareStatement(selectSQL);
+            conn = dataSource.getConnection();
 
-			cst.execute();
+            cst = conn.prepareStatement(selectSQL);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
-		servicingList = fetchAllServicings();
-		return servicingList;
-	}
-	public List<ServicingBean> fetchAllServicesForAnEmployee(BigDecimal employee_id) throws SQLException {
-		PreparedStatement cst = null;
+            cst.execute();
 
-		Connection conn = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        servicingList = fetchAllServicings();
+        return servicingList;
+    }
 
-		String selectSQL = "SELECT servicing_id,employee_id,employee_name,service_name,servicing_date,servicing_status from servicing,employees,services where servicing_service_id = service_id AND servicing_employee_id ="
-				+ employee_id;
-		List<ServicingBean> ServiceForAnEmployee = new ArrayList<ServicingBean>();
+    public List<ServicingBean> fetchAllServicesForAnEmployee(BigDecimal employee_id) throws SQLException {
+        PreparedStatement cst = null;
 
-		try {
+        Connection conn = null;
 
-			conn = dataSource.getConnection();
-			cst = conn.prepareStatement(selectSQL);
+        String selectSQL = "SELECT servicing_id,employee_id,employee_name,service_name,servicing_date,servicing_status from servicing,employees,services where servicing_service_id = service_id AND servicing_employee_id ="
+                + employee_id;
+        List<ServicingBean> ServiceForAnEmployee = new ArrayList<ServicingBean>();
 
-			ResultSet rs = cst.executeQuery();
-			while (rs.next()) {
-				ServicingBean employeeService = new ServicingBean();
-				employeeService.setServicing_id(rs.getBigDecimal("servicing_id"));
-				employeeService.setEmployee_id(rs.getBigDecimal("employee_id"));
-				employeeService.setEmployee_name(rs.getString("employee_name"));
-				employeeService.setService_name(rs.getString("service_name"));
-				employeeService.setServicing_date(rs.getDate("servicing_date"));
-				employeeService.setServicing_status(rs.getString("servicing_status"));
+        try {
 
-				ServiceForAnEmployee.add(employeeService);
-			}
+            conn = dataSource.getConnection();
+            cst = conn.prepareStatement(selectSQL);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			conn.close();
-		}
+            ResultSet rs = cst.executeQuery();
+            while (rs.next()) {
+                ServicingBean employeeService = new ServicingBean();
+                employeeService.setServicing_id(rs.getBigDecimal("servicing_id"));
+                employeeService.setEmployee_id(rs.getBigDecimal("employee_id"));
+                employeeService.setEmployee_name(rs.getString("employee_name"));
+                employeeService.setService_name(rs.getString("service_name"));
+                employeeService.setServicing_date(rs.getDate("servicing_date"));
+                employeeService.setServicing_status(rs.getString("servicing_status"));
 
-		return ServiceForAnEmployee;
-	}
+                ServiceForAnEmployee.add(employeeService);
+            }
 
-	public int genRandomInt() {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
 
-		Random rnd = new Random();
-		return rnd.nextInt(30);
+        return ServiceForAnEmployee;
+    }
 
-	}
+    public int genRandomInt() {
 
-	public Date currentdate() {
-		Calendar calendar = Calendar.getInstance();
+        Random rnd = new Random();
+        return rnd.nextInt(30);
 
-		java.util.Date currentDate = calendar.getTime();
-		java.sql.Date date = new java.sql.Date(currentDate.getTime());
+    }
 
-		return date;
-	}
+    public Date currentdate() {
+        Calendar calendar = Calendar.getInstance();
+
+        java.util.Date currentDate = calendar.getTime();
+        java.sql.Date date = new java.sql.Date(currentDate.getTime());
+
+        return date;
+    }
 
 }
